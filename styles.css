@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Asap:wght@500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Asap, sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  background-color: #8d99ae;
+  max-width: 1000px;
+}
+
+#header {
+  text-align: center;
+  background-color: #2b2d42;
+  padding: 1.5rem;
+}
+
+#logo {
+  font-size: 3.3rem;
+  font-weight: 900;
+  color: white;
+}
+
+#scoreboard {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 30px;
+}
+
+#player, 
+#computer {
+  background-color: #8d99ae;
+  border-radius: 3px;
+  padding: 12px 16px;
+  margin: 5px;
+}
+
+#total {
+  background-color: #edf2f4;
+  border-radius: 3px;
+  padding: 12px 16px;
+  margin: 5px;
+}
+
+#playernum,
+#compnum,
+#totalnum {
+  padding-top: 10px;
+  font-size: 2rem;
+}
+
+#gamewinner {
+  text-align: center;
+  background-color: #d90429;
+  padding: 30px 0px;
+}
+
+#gameboard {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: #8d99ae;
+}
+
+#buttonsection {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 30px;
+  flex-wrap: wrap;
+}
+
+#rock,
+#paper,
+#scissors {
+  margin: 10px;
+  background-color: #edf2f4;
+  border-radius: 6px;
+}
+
+#rock img,
+#paper img,
+#scissors img {
+  width: 260px;
+}
+
+#compchoice {
+  display: flex;
+  justify-content: center;
+}
+
+#lower {
+  display: flex;
+  flex-direction: column;
+}
+
+#compannounce {
+  font-size: 1.75rem;
+  padding: 40px 0px;
+}
+
+#reset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#resetbtn {
+  font-size: 2.5rem;
+  padding: 12px 25px;
+  margin-bottom: 40px;
+  background-color: #2b2d42;
+  color: white;
+}
