@@ -23,13 +23,20 @@ body {
   font-size: 4rem;
   font-weight: 900;
   color: #edf2f4;
-  padding: 10px;
 }
 
 #scoreboard {
   display: flex;
   justify-content: space-evenly;
   padding-top: 30px;
+}
+
+@media only screen and (max-width: 500px) {
+  #scoreboard {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
 }
 
 #player, 
@@ -106,6 +113,7 @@ body {
 #compannounce {
   font-size: 2rem;
   padding: 40px 0px;
+  text-align: center;
 }
 
 #reset {
