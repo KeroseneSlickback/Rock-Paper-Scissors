@@ -1,40 +1,3 @@
-/*
-Psuedo-Code:
-
-Wait for user input, direct input into game rules
-Create computer logic for random choice
-
-Depending on win/loss/draw: Announce winner/draw, update score boards,
-and announce computer's choice
-
-Highlight throw button if it was correct, wrong, or draw
-Highlight scoreboard when score increases one second after match conclusion
-
-At end of round, announce grand winner of the matches
-Highlight Play Again! button in a pulse at the end
-Reset game rules
-
-
-Step by step:
-
-X DOM cache for input buttons
-X Set variables for scores and rounds
-
-Reset function
-
-Highlight player's choice
-
-Update scoreboards, announce winner/draw
-
-Computer choice
-
-Game rules, win/loss/draw
-
-Button inputs to functions
-
-
-*/
-
 //variables
 let playerScore = 0;
 let compScore = 0;
@@ -45,7 +8,6 @@ const playerBoard = document.getElementById("player");
 const compBoard = document.getElementById("computer");
 
 const playerWins = document.getElementById("playernum");
-const totalRounds = document.getElementById("totalnum");
 const compWins = document.getElementById("compnum");
 
 const winnerAnnounce = document.getElementById("winner");
@@ -57,33 +19,80 @@ const scissorsBtn = document.getElementById("scissors");
 const compAnnounce = document.getElementById("compannounce");
 const resetBtn = document.getElementById("resetbtn");
 
-function RandomChoice() {
-  const choices = ['rock', 'paper', 'scissors'];
-  const randomNumber = Math.floor(Math.random() * 3);
-  return choices[randomNumber];
+function reset() {
+  playerScore = 0;
+  compScore = 0;
+  rockBtn.disabled = false;
+  paperBtn.disabled = false;
+  scissorsBtn.disabled = false;
+  resetBtn.disabled = true;
+  playerWins.innerText = playerScore;
+  compWins.innerText = compScore;
+  console.log("reset")
+  winnerAnnounce.innerText = "The Winner is..."
+}
+
+function endGame() {
+  rockBtn.disabled = true;
+  paperBtn.disabled = true;
+  scissorsBtn.disabled = true;
+  resetBtn.disabled = false;
+  resetBtn.addEventListener('click', () => reset());
+  console.log("end")
+  resetBtn.classList.add('white-glow');
+  setTimeout(() => resetBtn.classList.remove('white-glow'), 2000);
 }
 
 function draw(playerChoice, computerChoice) {
-  winnerAnnounce.innerText = "It's a draw!"
+  const playerChoice_box = document.getElementById(playerChoice);
+  winnerAnnounce.innerText = "It's a Draw!"
   compAnnounce.innerText = `The Computer chose ${computerChoice}.`;
+  playerChoice_box.classList.add('gray-glow');
+  setTimeout( () => playerChoice_box.classList.remove('gray-glow'), 1000);
 }
 
 function win(playerChoice, computerChoice) {  
   playerScore++;
+  const playerChoice_box = document.getElementById(playerChoice);
   playerWins.innerText = playerScore;
-  winnerAnnounce.innerText = "The User Won!"
+  winnerAnnounce.innerText = "You Won!"
   compAnnounce.innerText = `The Computer chose ${computerChoice}.`;
-}
+  playerChoice_box.classList.add('green-glow');
+  setTimeout( () => playerChoice_box.classList.remove('green-glow'), 1000);
+  playerBoard.classList.add('green-glow');
+  setTimeout(() => playerBoard.classList.remove('green-glow'), 1000);
+  if (playerScore == 5) {
+    winnerAnnounce.innerText = "Congrats! You won the game! Play again!";
+    endGame();
+    }
+  }
 
 function lose(playerChoice, computerChoice) {
   compScore++
+  const playerChoice_box = document.getElementById(playerChoice);
   compWins.innerText = compScore;
   winnerAnnounce.innerText = "The Computer Won!"
   compAnnounce.innerText = `The Computer chose ${computerChoice}.`;
-}
+  playerChoice_box.classList.add('red-glow');
+  setTimeout( () => playerChoice_box.classList.remove('red-glow'), 1000);
+  compBoard.classList.add('red-glow');
+  setTimeout(() => compBoard.classList.remove('red-glow'), 1000);
+  if (compScore == 5) {
+    winnerAnnounce.innerText = "Oh no, you lost! Play again!";
+    endGame();
+    }
+  }
+
+function randomChoice() {
+  const choices = ['rock', 'paper', 'scissors'];
+  const randomNumber = Math.floor(Math.random() * 3);
+  return choices[randomNumber];
+  }
 
 function game(playerChoice) {
-  const computerChoice = RandomChoice();
+  let playerScore = 0;
+  let compScore = 0;
+  const computerChoice = randomChoice();
   switch (playerChoice + computerChoice) {
     case "rockrock":
     case "paperpaper":
@@ -103,7 +112,6 @@ function game(playerChoice) {
   }
 }
 
-rockBtn.addEventListener('click', () => game("rock"))
-paperBtn.addEventListener('click', () => game("paper"))
-scissorsBtn.addEventListener('click', () => game("scissors"))
-// resetBtn.addEventListener('click', )
+rockBtn.addEventListener('click', () => game('rock'));
+paperBtn.addEventListener('click', () => game('paper'));
+scissorsBtn.addEventListener('click', () => game('scissors'));
